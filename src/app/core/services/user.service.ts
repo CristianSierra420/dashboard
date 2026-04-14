@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user.model';
+import { User as UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class User {
+export class UserService {
 
   // Estado central de usuarios como BehaviorSubject
-  private usersSubject = new BehaviorSubject<User[]>([
+  private usersSubject = new BehaviorSubject<UserModel[]>([
     {
       id: '1',
       name: 'Juan García',
@@ -55,13 +55,13 @@ export class User {
   users$ = this.usersSubject.asObservable();
 
   // Método para obtener el valor actual de usuarios
-  getUsers(): User[] {
+  getUsers(): UserModel[] {
     return this.usersSubject.getValue();
   }
 
   // Método para agregar un nuevo usuario
-  addUser(user: Omit<User, 'id' | 'createdAt' | 'updatedAt'>): void {
-    const newUser: User = {
+  addUser(user: Omit<UserModel, 'id' | 'createdAt' | 'updatedAt'>): void {
+    const newUser: UserModel = {
       ...user,
       id: Date.now().toString(),
       createdAt: new Date(),
@@ -72,7 +72,7 @@ export class User {
   }
 
   // Método para actualizar un usuario
-  updateUser(id: string, updates: Partial<User>): void {
+  updateUser(id: string, updates: Partial<UserModel>): void {
     const current = this.usersSubject.getValue();
     const updated = current.map(u => 
       u.id === id ? { ...u, ...updates, updatedAt: new Date() } : u

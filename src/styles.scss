@@ -1,21 +1,8 @@
 // src/styles.scss
 @use '@angular/material' as mat;
 
+// Configuración básica de Material
 @include mat.core();
-
-$primary: mat.define-palette(mat.$indigo-palette, 700);
-$accent:  mat.define-palette(mat.$blue-palette, A200);
-$warn:    mat.define-palette(mat.$red-palette);
-
-$light-theme: mat.define-light-theme((
-  color: (primary: $primary, accent: $accent, warn: $warn),
-  typography: mat.define-typography-config(
-    $font-family: 'Syne, sans-serif'
-  ),
-  density: -1
-));
-
-@include mat.all-component-themes($light-theme);
 
 // Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
